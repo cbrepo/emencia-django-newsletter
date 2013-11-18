@@ -2,17 +2,17 @@
 import os
 
 from django.contrib import admin
-from django.conf.urls.defaults import url
-from django.conf.urls.defaults import include
-from django.conf.urls.defaults import patterns
-from django.conf.urls.defaults import handler404
-from django.conf.urls.defaults import handler500
+from django.conf.urls import url
+from django.conf.urls import include
+from django.conf.urls import patterns
+from django.conf.urls import handler404
+from django.conf.urls import handler500
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       (r'^$', 'django.views.generic.simple.redirect_to',
-                        {'url': '/admin/'}),
+                       (r'^$', TemplateView.as_view(template_name='/admin/')),
                        url(r'^newsletters/', include('emencia.django.newsletter.urls')),
                        url(r'^i18n/', include('django.conf.urls.i18n')),
                        url(r'^admin/', include(admin.site.urls)),
